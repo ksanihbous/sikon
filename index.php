@@ -458,47 +458,13 @@ function brainst($keyword) {
 }
 #-------------------------[Close]-------------------------#
 function brain($keyword) {
-    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . '&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA';
+    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . '&apikey=ppqeuy';
+
     $response = Unirest\Request::get("$uri");
+
     $json = json_decode($response->raw_body, true);
     $result = "「Brainly」";
     $result .= "Status : Success!!!";
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
-    $result .= "\nSoal : ";
-    $result .= $json['title'];
-    $result .= "\nLink Jawaban : ";
-    $result .= $json['url'];
     $result .= "\nSoal : ";
     $result .= $json['title'];
     $result .= "\nLink Jawaban : ";
