@@ -1500,6 +1500,20 @@ if($message['type']=='text') {
 }
 }
 #-------------------------[Close]-------------------------#
+if($message['type']=='text') {
+	    if ($command == '/twitter') {
+        $result = twitter($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
 #============================= FILM SC ====================#
 #-------------------------[Open]-------------------------#
 if($message['type']=='text') {
