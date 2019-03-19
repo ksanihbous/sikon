@@ -270,6 +270,26 @@ function film_syn($keyword) {
     return $result;
 }
 #-------------------------[Close]-------------------------#
+#-------------------------[Function]-------------------------#
+function adfly($url, $key, $uid, $domain = 'adf.ly', $advert_type = 'int')
+{
+  // base api url
+  $api = 'http://api.adf.ly/api.php?';
+  // api queries
+  $query = array(
+    '7970aaad57427df04129cfe2cfcd0584' => $key,
+    '16519547' => $uid,
+    'advert_type' => $advert_type,
+    'domain' => $domain,
+    'url' => $url
+  );
+  // full api url with query string
+  $api = $api . http_build_query($query);
+  // get data
+  if ($data = file_get_contents($api))
+    return $data;
+}
+#----------------#
 #-------------------------[Open]-------------------------#
 function films($keyword) {
     $uri = "http://www.omdbapi.com/?t=" . $keyword . '&plot=full&apikey=d5010ffe';
@@ -730,6 +750,20 @@ if($message['type']=='text') {
     }
 }
 #=======================
+if($message['type']=='text') {
+	    if ($command == '/shorten') {
+        $result = adfly($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $data
+                )
+            )
+        );
+    }
+}
 #=======================
 #=======================
 #=======================
