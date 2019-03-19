@@ -1079,7 +1079,20 @@ if($message['type']=='text') {
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => $result,
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
+#============
+if($message['type']=='text') {
+	    if ($command == '/musik') {
+        $result = musiknya($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
 		    'type' => 'audio',
 		    'originalContentUrl' => $result,
 		    'duration' => 10000,
@@ -1088,7 +1101,6 @@ if($message['type']=='text') {
         );
     }
 }
-#============
 #-------------------------[Open]-------------------------#
 #=======================
 if($message['type']=='text') {
