@@ -466,9 +466,9 @@ function brain($keyword) {
     $result = "「Brainly」";
     $result .= "\nStatus : Success!!!";
     $result .= "\nSoal : ";
-	$result .= $json['title'];
+	$result .= $json["title"];
     $result .= "\nLink Jawaban : ";
-	$result .= $json['url'];
+	$result .= $json["url"];
     $result .= "\nSoal : ";
 	$result .= $json['title'];
     $result .= "\nLink Jawaban : ";
