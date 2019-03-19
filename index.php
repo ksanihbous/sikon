@@ -560,7 +560,7 @@ if($message['type']=='text') {
             )
         );
 
-    } else if ($command == '/menu') {
+    } else if ($command == '!menu') {
                     $balas = array(
         'replyToken' => $replyToken,
         'messages' => array(
