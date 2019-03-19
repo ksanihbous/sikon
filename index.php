@@ -165,7 +165,7 @@ function tv($keyword) {
 }
 #-------------------------[Function Open]-------------------------#
 function brains($keyword) {
-    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
+    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . '&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "「Jawaban Brainly」";
@@ -343,7 +343,7 @@ function tts($keyword) {
 }
 #-------------------------[Close]-------------------------#
 function surah($keyword) {
-    $uri = "https://al-quran-8d642.firebaseio.com/surat/" . $keyword . ".json?print=pretty";
+    $uri = "https://al-quran-8d642.firebaseio.com/surat/" . $keyword . '.json?print=pretty';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "Ayat : \n";
@@ -399,7 +399,7 @@ function film($keyword) {
 }
 #-------------------------[Close]-------------------------#
 function ahli($keyword) {
-    $uri = "https://rest.farzain.com/api/ahli.php?name=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
+    $uri = "https://rest.farzain.com/api/ahli.php?name=" . $keyword . '&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA';
   
     $response = Unirest\Request::get("$uri");
   
@@ -458,7 +458,7 @@ function brain($keyword) {
 }
 #-------------------------[Close]-------------------------#
 function brainss($keyword) {
-    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
+    $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . '&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "「Brainly」";
@@ -561,7 +561,7 @@ function instagram($keyword) {
 }
 #=====================================
 function waktu($keyword) {
-    $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . "&apikey=beta";
+    $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=beta';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "「Time Result」\n";
@@ -711,6 +711,20 @@ if($message['type']=='text') {
     }
 }
 #=======================
+if($message['type']=='text') {
+	    if ($command == '/waktu') {
+        $result = waktu($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
 #=======================
 #=======================
 #=======================
