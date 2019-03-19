@@ -1989,7 +1989,6 @@ if($message['type']=='text') {
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nLikes :" . $result['a6'];
-        $altText2 .= "\nTweet :" . $result['a8'];
         $balas = array( 
             'replyToken' => $replyToken, 
             'messages' => array( 
