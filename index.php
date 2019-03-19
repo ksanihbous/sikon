@@ -607,11 +607,9 @@ function instagram($keyword) {
     return $parsed;
 }
 #=================
-function twitters($keyword) {
+function twitte($keyword) {
     $uri = "https://rest.farzain.com/api/twitter.php?id=" . $keyword . '&apikey=ppqeuy';
-
     $response = Unirest\Request::get("$uri");
-
     $json = json_decode($response->raw_body, true);
     $parsed = array();
     $parsed['a1'] = $json['result']['name'];
@@ -1987,7 +1985,7 @@ if($message['type']=='text') {
 if($message['type']=='text') {
     if ($command == '!twitter') { 
         
-        $result = twitters($options);
+        $result = twitte($options);
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nLikes :" . $result['a6'];
