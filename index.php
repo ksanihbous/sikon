@@ -560,8 +560,8 @@ function instagram($keyword) {
     return $parsed;
 }
 #=====================================
-function waktu($keyword) {
-    $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=beta';
+function waktus($keyword) {
+    $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=ppqeuy';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "「Time Result」\n";
@@ -589,6 +589,22 @@ function cuaca($keyword) {
 	$result .= $json['weather']['0']['description'];
     return $result;
 }
+#======================
+if($message['type']=='text') {
+	    if ($command == '/waktu') {
+        $result = waktu($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
+#=======================
 //translate//
 if($message['type']=='text') {
 	    if ($command == '/tr-ar') {
