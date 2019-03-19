@@ -1930,6 +1930,7 @@ if($message['type']=='text') {
     if ($command == '/instagram') { 
         
         $result = instagram($options);
+        $altText2 = "Username : " . $result['a1'];
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nPost :" . $result['a5'];
@@ -1953,7 +1954,7 @@ if($message['type']=='text') {
                               0 =>  
                               array ( 
                                 'type' => 'uri', 
-                                'label' => 'Check', 
+                                'label' => 'Check Instagram', 
                                 'uri' => $result['a8'],
                               ), 
                             ), 
