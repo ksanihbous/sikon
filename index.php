@@ -1952,7 +1952,6 @@ if($message['type']=='text') {
         $result = instagram($options);
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
-        $altText2 .= "\nBio :" . $result['a2'];
         $altText2 .= "\nPost :" . $result['a5'];
         $balas = array( 
             'replyToken' => $replyToken, 
@@ -1991,7 +1990,6 @@ if($message['type']=='text') {
         $result = twitters($options);
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
-        $altText2 .= "\nBio :" . $result['a5'];
         $altText2 .= "\nLikes :" . $result['a6'];
         $altText2 .= "\nTweet :" . $result['a8'];
         $balas = array( 
