@@ -51,6 +51,105 @@ function shalat($keyword) {
 	$result .= $json['data']['Isha'];
     return $result;
 }
+#----------------#
+function send($input, $rt){
+    $send = array(
+        'replyToken' => $rt,
+        'messages' => array(
+            array(
+                'type' => 'text',					
+                'text' => $input
+            )
+        )
+    );
+    return($send);
+}
+function jawabs(){
+    $list_jwb = array(
+		'Ya',
+	        'Bisa jadi',
+	        'Mungkin saja',
+	        'Gak tau',
+	        'Kek ada yang ngomong :)',
+		'Tidak',
+		'Coba ajukan pertanyaan lain',	    
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+function kapan(){
+    $list_jwb = array(
+		'Besok',
+		'1 Hari Lagi',
+		'1 Bulan Lagi',
+		'1 Tahun Lagi',
+		'1 Abad Lagi',
+		'Coba ajukan pertanyaan lain',	    
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+function bisa(){
+    $list_jwb = array(
+		'Bisa',
+		'Tidak Bisa',
+		'Bisa Jadi',
+		'Mungkin Tidak Bisa',
+		'Coba ajukan pertanyaan lain',	    
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+function dosa(){
+    $list_jwb = array(
+		'10%',
+		'20%',
+		'30%',
+		'40%',
+		'50%',
+		'60%',
+		'70%',
+		'80%',
+		'90%',
+		'100%'	
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+function dosa2(){
+    $list_jwb = array(
+		'Dosanya Sebesar ',
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+function dosa3(){
+    $list_jwb = array(
+		' Cepat cepat tobat bos',
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
+}
+#-------------------------[Function]-------------------------#
+function musiknya($keyword) {
+    $uri = "http://api.zicor.ooo/joox.php?song=" . $keyword;
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "「Music Result」\n";
+    $result .= "\n\nPenyanyinya: ";
+    $result .= $json['singer'];
+    $result .= "\n\nJudulnya: ";
+    $result .= $json['title'];
+    $result .= "\nMp3: \n";
+    $result .= $json['url'];
+    return $result;
+}
 #-------------------------[Function Open]-------------------------#
 function tv($keyword) {
     $uri = "https://rest.farzain.com/api/acaratv.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
@@ -534,6 +633,56 @@ if($message['type']=='text') {
 if($message['type']=='text') {
 	    if ($command == '/tr-su') {
         $result = trsu($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
+#=============
+if($msg_type == 'text'){
+    $pesan_datang = strtolower($message['text']);
+    $filter = explode(' ', $pesan_datang);
+    if($filter[0] == 'apakah') {
+        $balas = send(jawabs(), $replyToken);
+    } else {}
+} if($msg_type == 'text'){
+    $pesan_datang = strtolower($message['text']);
+    $filter = explode(' ', $pesan_datang);
+    if($filter[0] == 'bisakah') {
+        $balas = send(bisa(), $replyToken);
+    } else {}
+} if($msg_type == 'text'){
+    $pesan_datang = strtolower($message['text']);
+    $filter = explode(' ', $pesan_datang);
+    if($filter[0] == 'kapankah') {
+        $balas = send(kapan(), $replyToken);
+    } else {}
+} if($msg_type == 'text'){
+    $pesan_datang = strtolower($message['text']);
+    $filter = explode(' ', $pesan_datang);
+    if($filter[0] == 'rate') {
+        $balas = send(dosa(), $replyToken);
+    } else {}
+} if($msg_type == 'text'){
+    $pesan_datang = strtolower($message['text']);
+    $filter = explode(' ', $pesan_datang);
+    if($filter[0] == 'dosanya') {
+		$balas = send(dosa2(), $replyToken);
+		$balas = send(dosa(), $replyToken);
+		$balas = send(dosa3(), $replyToken);
+    } else {}
+} else {}
+//batasan command api//
+#=====================
+if($message['type']=='text') {
+	    if ($command == '/musik') {
+        $result = musiknya($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
