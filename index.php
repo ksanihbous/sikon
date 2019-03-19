@@ -614,8 +614,8 @@ function twitters($keyword) {
 
     $json = json_decode($response->raw_body, true);
     $parsed = array();
-    $parsed['a1'] = $json['screen_name'];
-    $parsed['a2'] = $json['name'];
+    $parsed['a1'] = $json['name'];
+    $parsed['a2'] = $json['screen_name'];
     $parsed['a3'] = $json['followers'];
     $parsed['a4'] = $json['following'];
     $parsed['a5'] = $json['description'];
@@ -1952,6 +1952,7 @@ if($message['type']=='text') {
         $result = instagram($options);
         $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
+        $altText2 .= "\nBio :" . $result['a2'];
         $altText2 .= "\nPost :" . $result['a5'];
         $balas = array( 
             'replyToken' => $replyToken, 
