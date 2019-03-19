@@ -1079,12 +1079,17 @@ if($message['type']=='text') {
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => $result
+                    'text' => $result,
+		    'type' => 'audio',
+		    'originalContentUrl' => $result,
+		    'duration' => 10000,
                 )
             )
         );
     }
 }
+#============
+#-------------------------[Open]-------------------------#
 #=======================
 if($message['type']=='text') {
 	    if ($command == '/shorten') {
