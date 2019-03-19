@@ -783,6 +783,43 @@ if($message['type']=='text') {
 }
 
 }
+#==========================
+if($message['type']=='text') {
+	    if ($command == '/anime') {
+        $result = anime($options);
+        $altText = "Title : " . $result['title'];
+        $altText .= "\n\n" . $result['desc'];
+        $altText .= "\nMAL Page : https://myanimelist.net/anime/" . $result['id'];
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'template',
+                    'altText' => $altText,
+                    'template' => array(
+                        'type' => 'buttons',
+                        'title' => $result['title'],
+                        'thumbnailImageUrl' => $result['image'],
+                        'text' => $result['desc'],
+                        'actions' => array(
+                            array(
+                                'type' => 'postback',
+                                'label' => 'Baca Sinopsis-nya',
+                                'data' => 'action=add&itemid=123',
+                                'text' => '/anime-syn ' . $options
+                            ),
+                            array(
+                                'type' => 'uri',
+                                'label' => 'Website MAL',
+                                'uri' => 'https://myanimelist.net/anime/' . $result['id']
+                            )
+                        )
+                    )
+                )
+            )
+        );
+    }
+}
 #====================
 //show menu, saat join dan command,menu
 if ($command == 'Help') {
