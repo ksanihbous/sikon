@@ -614,14 +614,14 @@ function twitters($keyword) {
 
     $json = json_decode($response->raw_body, true);
     $parsed = array();
-    $parsed['a1'] = $json['name'];
-    $parsed['a2'] = $json['screen_name'];
-    $parsed['a3'] = $json['followers'];
-    $parsed['a4'] = $json['following'];
-    $parsed['a5'] = $json['description'];
-    $parsed['a6'] = $json['likes'];
-    $parsed['a7'] = $json['profilepicture'];
-    $parsed['a8'] = $json['tweet'];
+    $parsed['a1'] = $json['result']['name'];
+    $parsed['a2'] = $json['result']['screen_name'];
+    $parsed['a3'] = $json['result']['followers'];
+    $parsed['a4'] = $json['result']['following'];
+    $parsed['a5'] = $json['result']['description'];
+    $parsed['a6'] = $json['result']['likes'];
+    $parsed['a7'] = $json['result']['profilepicture'];
+    $parsed['a8'] = $json['result']['tweet'];
     $parsed['a9'] = "https://www.twitter.com/" . $keyword;
     return $parsed;
 }
