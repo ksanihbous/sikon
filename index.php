@@ -141,7 +141,7 @@ function musiknya($keyword) {
     $uri = "http://api.zicor.ooo/joox.php?song=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result .= $json['url'];
+    $result = $json['url'];
     return $result;
 }
 #-------------------------[Function Open]-------------------------#
