@@ -168,11 +168,15 @@ function twitter($keyword) {
     $uri = "https://rest.farzain.com/api/twitter.php?id=" . $keyword . '&apikey=ppqeuy';
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result = "「Twitter Result」\n\n";
+    $result = "「 Twitter Result 」\n\n";
     $result .= "DisplayName: ";
-    $result .= $json[0]['user']['name'];
+    $result .= $json[0]['result']['name'];
     $result .= "UserName: ";
-    $result .= $json[0]['user']['screen_name'];
+    $result .= $json[0]['result']['screen_name'];
+    $result .= "Followers: ";
+    $result .= $json[0]['result']['followers'];
+    $result .= "Following: ";
+    $result .= $json[0]['result']['following'];
     return $result;
 }
 #================================
