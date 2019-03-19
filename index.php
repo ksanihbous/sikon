@@ -560,7 +560,7 @@ function instagram($keyword) {
     return $parsed;
 }
 #=====================================
-function waktus($keyword) {
+function waktu($keyword) {
     $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=ppqeuy';
 
     $response = Unirest\Request::get("$uri");
@@ -594,7 +594,7 @@ function cuaca($keyword) {
 #======================
 if($message['type']=='text') {
 	    if ($command == '/waktu') {
-        $result = waktus($options);
+        $result = waktu($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
@@ -729,25 +729,7 @@ if($message['type']=='text') {
     }
 }
 #=======================
-
 #=======================
-if($message['type']=='text') {
-	    if ($command == '/waktu' || $command == '/Waktu') {
-        $result = lokasi($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'location',
-                    'title' => 'Lokasi',
-                    'address' => $result['location']['address'],
-                    'latitude' => $result['time']['time'],
-                    'longitude' => $result['time']['date']
-                ),
-            )
-        );
-    }
-}
 #=======================
 #=======================
 #=======================
