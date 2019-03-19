@@ -1950,8 +1950,7 @@ if($message['type']=='text') {
     if ($command == '/instagram') { 
         
         $result = instagram($options);
-        $altText2 = "Username : " . $result['a1'];
-        $altText2 .= "Followers : " . $result['a3'];
+        $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nPost :" . $result['a5'];
         $balas = array( 
@@ -1989,8 +1988,7 @@ if($message['type']=='text') {
     if ($command == '!twitter') { 
         
         $result = twitters($options);
-        $altText2 = "Username : " . $result['a1'];
-        $altText2 .= "Followers : " . $result['a3'];
+        $altText2 = "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nBio :" . $result['a5'];
         $altText2 .= "\nLikes :" . $result['a6'];
