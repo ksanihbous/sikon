@@ -141,12 +141,6 @@ function musiknya($keyword) {
     $uri = "http://api.zicor.ooo/joox.php?song=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result = "「Music Result」\n";
-    $result .= "\n\nPenyanyinya: ";
-    $result .= $json['singer'];
-    $result .= "\n\nJudulnya: ";
-    $result .= $json['title'];
-    $result .= "\nMp3: \n";
     $result .= $json['url'];
     return $result;
 }
@@ -1071,20 +1065,6 @@ if($msg_type == 'text'){
 } else {}
 //batasan command api//
 #=====================
-if($message['type']=='text') {
-	    if ($command == '/musik') {
-        $result = musiknya($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-}
 #============
 if($message['type']=='text') {
 	    if ($command == '/musik') {
