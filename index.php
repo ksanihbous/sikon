@@ -598,6 +598,28 @@ function waktu($keyword) {
         $result .= $json['time']['date'];
     return $result;
 }
+#================================
+// ----- LOCATION BY FIDHO -----//
+function lokasi($keyword) { 
+    $uri = "https://time.siswadi.com/pray/" . $keyword; 
+ 
+    $response = Unirest\Request::get("$uri"); 
+ 
+    $json = json_decode($response->raw_body, true); 
+ $result['address'] .= $json['location']['address'];
+ $result['latitude'] .= $json['location']['latitude'];
+ $result['longitude'] .= $json['location']['longitude'];
+    return $result; 
+}
+#-------------------------[Function]-------------------------#
+#-------------------------[Function]-------------------------#
+function fansign($keyword) {
+    $uri = "https://rest.farzain.com/api/special/fansign/cosplay/cosplay.php?apikey=ppqeuy&text=" . $keyword;
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+	  $result .= $json['url'];
+    return $result;
+}
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
     $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
@@ -765,7 +787,39 @@ if($message['type']=='text') {
     }
 }
 #=======================
+if($message['type']=='text') {
+	    if ($command == '/fansign') {
+        $result = fansign($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'image',
+                    'originalContentUrl' => $result,
+                    'previewImageUrl' => $result
+                )
+            )
+        );
+    }
+}
 #=======================
+if($message['type']=='text') {
+	    if ($command == '/lokasi' || $command == '/Lokasi') {
+        $result = lokasi($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'location',
+                    'title' => 'Lokasi',
+                    'address' => $result['address'],
+                    'latitude' => $result['latitude'],
+                    'longitude' => $result['longitude']
+                ),
+            )
+        );
+    }
+}
 #=======================
 #=======================
 //pesan bergambar
