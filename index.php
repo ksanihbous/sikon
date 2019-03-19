@@ -606,6 +606,26 @@ function instagram($keyword) {
     $parsed['a8'] = "https://www.instagram.com/" . $keyword;
     return $parsed;
 }
+#=================
+function twitters($keyword) {
+    $uri = "https://rest.farzain.com/api/twitter.php?id=" . $keyword . '&apikey=ppqeuy';
+
+    $response = Unirest\Request::get("$uri");
+
+    $json = json_decode($response->raw_body, true);
+    $parsed = array();
+    $parsed['a1'] = $json['screen_name'];
+    $parsed['a2'] = $json['name'];
+    $parsed['a3'] = $json['followers'];
+    $parsed['a4'] = $json['following'];
+    $parsed['a5'] = $json['description'];
+    $parsed['a6'] = $json['likes'];
+    $parsed['a7'] = $json['profilepicture'];
+    $parsed['a8'] = $json['tweet'];
+    $parsed['a9'] = "https://www.twitter.com/" . $keyword;
+    return $parsed;
+}
+#==========================
 #=====================================
 function waktu($keyword) {
     $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=ppqeuy';
@@ -1931,7 +1951,7 @@ if($message['type']=='text') {
         
         $result = instagram($options);
         $altText2 = "Username : " . $result['a1'];
-        $altText2 = "Followers : " . $result['a3'];
+        $altText2 .= "Followers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nPost :" . $result['a5'];
         $balas = array( 
@@ -1965,6 +1985,46 @@ if($message['type']=='text') {
     }
 }
 #-------------------------[Open]-------------------------#
+if($message['type']=='text') {
+    if ($command == '!twitter') { 
+        
+        $result = twitters($options);
+        $altText2 = "Username : " . $result['a1'];
+        $altText2 .= "Followers : " . $result['a3'];
+        $altText2 .= "\nFollowing :" . $result['a4'];
+        $altText2 .= "\nBio :" . $result['a5'];
+        $altText2 .= "\nLikes :" . $result['a6'];
+        $altText2 .= "\nTweet :" . $result['a8'];
+        $balas = array( 
+            'replyToken' => $replyToken, 
+            'messages' => array( 
+                array ( 
+                        'type' => 'template', 
+                          'altText' => 'Twitter @' . $options, 
+                          'template' =>  
+                          array ( 
+                            'type' => 'buttons', 
+                            'thumbnailImageUrl' => $result['a7'], 
+                            'imageAspectRatio' => 'rectangle', 
+                            'imageSize' => 'cover', 
+                            'imageBackgroundColor' => '#FFFFFF', 
+                            'title' => $result['a6'], 
+                            'text' => $altText2, 
+                            'actions' =>  
+                            array ( 
+                              0 =>  
+                              array ( 
+                                'type' => 'uri', 
+                                'label' => 'Check Twitter', 
+                                'uri' => $result['a9'],
+                              ), 
+                            ), 
+                          ), 
+                        ) 
+            ) 
+        ); 
+    }
+}
 #-------------------------[Open]-------------------------#
 if($message['type']=='text') {
         if ($command == '/creator') { 
