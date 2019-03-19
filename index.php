@@ -559,6 +559,22 @@ function instagram($keyword) {
     $parsed['a8'] = "https://www.instagram.com/" . $keyword;
     return $parsed;
 }
+#=====================================
+function waktu($keyword) {
+    $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . "&apikey=beta";
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "「Time Result」\n";
+        $result .= "\nNama kota: ";
+        $result .= $json['location']['address'];
+        $result .= "\nZona waktu: ";
+        $result .= $json['time']['timezone'];
+        $result .= "\nWaktu: \n";
+        $result .= $json['time']['time'];
+        $result .= "\n";
+        $result .= $json['time']['date'];
+    return $result;
+}
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
     $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
@@ -683,6 +699,55 @@ if($msg_type == 'text'){
 if($message['type']=='text') {
 	    if ($command == '/musik') {
         $result = musiknya($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
+#=======================
+#=======================
+#=======================
+#=======================
+#=======================
+//pesan bergambar
+if($message['type']=='text') {
+	    if ($command == 'Halo' || $command == 'Hai' ) {
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => 'Hi juga ka '.$profil->displayName
+                )
+            )
+        );
+    }
+}
+#=======================
+//pesan bergambar
+if($message['type']=='text') {
+	    if ($command == 'Bot' || $command == 'bot' ) {
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $profil->displayName.'Ketik !menu untuk info perintah'
+                )
+            )
+        );
+    }
+}
+#=======================
+if($message['type']=='text') {
+	    if ($command == '/waktu') {
+        $result = waktu($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
