@@ -163,6 +163,34 @@ function tv($keyword) {
     $result .= "\n「Done~」";
     return $result;
 }
+#==========================
+function twitter($keyword) {
+    $uri = "https://rest.farzain.com/api/twitter.php?id=" . $keyword . '&apikey=ppqeuy';
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "「Twitter Result」\n\n";
+    $result .= "DisplayName: ";
+    $result .= $json[0]['user']['name'];
+    $result .= "UserName: ";
+    $result .= $json[0]['user']['screen_name'];
+    return $result;
+}
+#================================
+function instainfo($keyword) {
+    $uri = "https://rest.farzain.com/api/ig_profile.php?id=" . $keyword . '&apikey=ppqeuy';
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $parsed['poto']      = $json['info']['profile_pict'];
+    $parsed['nama']      = $json['info']['full_name'];
+    $parsed['username']  = $json['info']['username'];
+    $parsed['followers'] = $json['count']['followers'];
+    $parsed['following'] = $json['count']["following"];
+    $parsed['totalpost'] = $json['count']['post'];
+    $parsed['bio']       = $json['info']['bio'];
+    $parsed['bawah']     = 'https://www.instagram.com/'. $keyword;
+    
+    return $parsed;
+}
 #-------------------------[Function Open]-------------------------#
 function brains($keyword) {
     $uri = "https://rest.farzain.com/api/brainly.php?id=" . $keyword . '&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA';
@@ -634,6 +662,247 @@ function cuaca($keyword) {
 	$result .= $json['weather']['0']['description'];
     return $result;
 }
+#============
+if ($command == '!help') {
+    $balas = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+          array (
+  'type' => 'template',
+  'altText' => 'Anda di sebut',
+  'template' =>
+  array (
+    'type' => 'carousel',
+    'columns' =>
+    array (
+        0 =>
+      array (
+        'thumbnailImageUrl' => 'https://pedestalsearch.com/wp-content/uploads/2016/04/video-seo-youtube-logo.png',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'YOUTUBE',
+        'text' => 'Temukan Vidio Kesukaanmu',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /youtube <judul vidio>',
+          ),
+        ),
+      ),
+       1 =>
+      array (
+        'thumbnailImageUrl' => 'https://seeklogo.com/images/T/twitter-2012-negative-logo-5C6C1F1521-seeklogo.com.png',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'TWITTER',
+        'text' => 'Mencari Informasi Akun Twitter',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /twitter <username>',
+          ),
+        ),
+      ),
+      2 =>
+      array (
+        'thumbnailImageUrl' => 'https://mirror.umd.edu/xbmc/addons/gotham/plugin.audio.soundcloud/icon.png',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'SOUND CLOUD',
+        'text' => 'Mencari Dan Unduh Musik Di SoundCloud',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /soundcloud <judul lagu>',
+          ),
+        ),
+      ),
+      3 =>
+      array (
+        'thumbnailImageUrl' => 'https://1c7qp243xy9g1qeffp1k1nvo-wpengine.netdna-ssl.com/wp-content/uploads/2016/03/instagram_logo.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'INSTAGRAM',
+        'text' => 'Menemukan Informasi Akun Instagram Berdasarkan Keyword',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /instagram <username>',
+          ),
+        ),
+      ),
+      4 =>
+      array (
+        'thumbnailImageUrl' => 'https://unnecessaryexclamationmark.files.wordpress.com/2016/05/myanimelist-logo.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'ANIME SEARCH',
+        'text' => 'Mencari Informasi Anime Berdasarkan Keyword',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /anime <judul anime>',
+          ),
+        ),
+      ),
+      5 =>
+      array (
+        'thumbnailImageUrl' => 'https://is3-ssl.mzstatic.com/image/thumb/Purple62/v4/cc/68/6c/cc686c29-ffd2-5115-2b97-c4821b548fe3/AppIcon-1x_U007emarketing-85-220-6.png/246x0w.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'PRAYTIME',
+        'text' => 'Mengetahui Jadwal Shalat Wilayah Indonesia',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /shalat <nama kota>',
+          ),
+        ),
+      ),
+      6 =>
+      array (
+        'thumbnailImageUrl' => 'https://i.pinimg.com/originals/d7/d8/a5/d7d8a5c1017dff37a359c95e88e0897b.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'FANSIGN ANIME',
+        'text' => 'Membuat FS Anime Berdasarkan Keyword',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /fansign <text nya>',
+          ),
+        ),
+      ),
+      7 =>
+      array (
+        'thumbnailImageUrl' => 'https://taisy0.com/wp-content/uploads/2015/07/Google-Maps.png',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'GOOGLEMAP',
+        'text' => 'Mengetahui Lokasi Dan Koordinat Nama Tempat',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /location <nama tempat>',
+          ),
+        ),
+      ),
+      8 =>
+      array (
+        'thumbnailImageUrl' => 'https://st3.depositphotos.com/3921439/12696/v/950/depositphotos_126961774-stock-illustration-the-tv-icon-television-and.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'TELEVISION',
+        'text' => 'Mencari Jadwal Acara Televisi Indonesia & Jakarta',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/123',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /jadwaltv <channel tv>',
+          ),
+        ),
+      ),
+      9 =>
+      array (
+        'thumbnailImageUrl' => 'https://4vector.com/i/free-vector-cartoon-weather-icon-05-vector_018885_cartoon_weather_icon_05_vector.jpg',
+        'imageBackgroundColor' => '#00FFFF',
+        'title' => 'WEATHER STATUS',
+        'text' => 'Mengetahui Prakiraan Cuaca Seluruh Dunia',
+        'defaultAction' =>
+        array (
+          'type' => 'uri',
+          'label' => 'View detail',
+          'uri' => 'http://example.com/page/222',
+        ),
+        'actions' =>
+        array (
+          0 =>
+          array (
+            'type' => 'message',
+            'label' => 'Show me',
+            'text' => 'Ketik /cuaca <nama kota>',
+          ),
+        ),
+      ),
+    ),
+    'imageAspectRatio' => 'rectangle',
+    'imageSize' => 'cover',
+  ),
+)
+)
+);
+}
 #======================
 if($message['type']=='text') {
 	    if ($command == '/waktu') {
@@ -717,6 +986,47 @@ if($message['type']=='text') {
                     'type' => 'text',
                     'text' => $result
                 )
+            )
+        );
+    }
+}
+#==============
+if($message['type']=='text') {
+	    if ($command == '!instagram' || $command == '!Instagram') {
+        $parsed = instainfo($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array (
+  'type' => 'template',
+  'altText' => 'This is a buttons template',
+  'template' => 
+  array (
+    'type' => 'buttons',
+    'thumbnailImageUrl' => $parsed['poto'],
+    'imageAspectRatio' => 'rectangle',
+    'imageSize' => 'cover',
+    'imageBackgroundColor' => '#FFFFFF',
+    'title' => 'Result1',
+    'text' => 'wrw',
+    'defaultAction' => 
+    array (
+      'type' => 'uri',
+      'label' => 'Youtube',
+      'uri' => 'http://example.com/page/123',
+    ),
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'postback',
+        'label' => 'Lihat video',
+        'data' => 'action=buy&itemid=123',
+	'text' => 'Youtube-view'
+      )
+    )
+  )
+)
             )
         );
     }
