@@ -2005,7 +2005,7 @@ if($message['type']=='text') {
                             'imageAspectRatio' => 'rectangle', 
                             'imageSize' => 'cover', 
                             'imageBackgroundColor' => '#FFFFFF', 
-                            'title' => $result['a6'], 
+                            'title' => $result['a1'], 
                             'text' => $altText2, 
                             'actions' =>  
                             array ( 
