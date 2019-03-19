@@ -562,7 +562,9 @@ function instagram($keyword) {
 #=====================================
 function waktus($keyword) {
     $uri = "https://rest.farzain.com/api/jam.php?id=" . $keyword . '&apikey=ppqeuy';
+
     $response = Unirest\Request::get("$uri");
+
     $json = json_decode($response->raw_body, true);
     $result = "「Time Result」\n";
         $result .= "\nNama kota: ";
@@ -592,7 +594,7 @@ function cuaca($keyword) {
 #======================
 if($message['type']=='text') {
 	    if ($command == '/waktu') {
-        $result = waktu($options);
+        $result = waktus($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
