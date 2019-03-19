@@ -169,14 +169,14 @@ function twitter($keyword) {
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $result = "「 Twitter Result 」\n\n";
-    $result .= "DisplayName: ";
-    $result .= $json[0]['result']['name'];
-    $result .= "UserName: ";
-    $result .= $json[0]['result']['screen_name'];
-    $result .= "Followers: ";
-    $result .= $json[0]['result']['followers'];
-    $result .= "Following: ";
-    $result .= $json[0]['result']['following'];
+    $result .= "\nDisplayName: ";
+    $result .= $json['result']['name'];
+    $result .= "\nUserName: ";
+    $result .= $json['result']['screen_name'];
+    $result .= "\nFollowers: ";
+    $result .= $json['result']['followers'];
+    $result .= "\nFollowing: ";
+    $result .= $json['result']['following'];
     return $result;
 }
 #================================
