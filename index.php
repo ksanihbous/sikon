@@ -676,8 +676,8 @@ function fansign($keyword) {
     $uri = "https://rest.farzain.com/api/special/fansign/cosplay/cosplay.php?apikey=ppqeuy&text=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-	  $result .= $json['url'];
-    return $result;
+    $result = $uri; 
+    return $result; 
 }
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
@@ -1189,7 +1189,7 @@ if($message['type']=='text') {
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => $profil->displayName.'Ketik !menu untuk info perintah'
+                    'text' => $profil->displayName.' Ketik !menu untuk info perintah'
                 )
             )
         );
