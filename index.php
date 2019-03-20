@@ -56,7 +56,7 @@ function ss($keyword) {
     $uri = "http://ryns-api.herokuapp.com/screenshot?url=" . $keyword . "";  
     $response = Unirest\Request::get("$uri");  
     $json = json_decode($response->raw_body, true); 
-    $result .= $json['result'];
+    $result .= $json['url'];
     return $result; 
 }
 #----------------#
@@ -1147,7 +1147,7 @@ if($msg_type == 'text'){
 //batasan command api//
 #===================== 	50000
 if($message['type']=='text') {
-	    if ($command == 'Screenshot') {
+	    if ($command == '/screenshot') {
         $result = ss($options);
         $balas = array(
             'replyToken' => $replyToken,
