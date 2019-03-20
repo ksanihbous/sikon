@@ -670,6 +670,14 @@ function lokasi($keyword) {
  $result['longitude'] .= $json['location']['longitude'];
     return $result; 
 }
+#======================= KBBI ====================#
+function kbbi($keyword) {
+    $uri = "https://rest.farzain.com/api/kbbi.php?id=" . $keyword . '&apikey=ppqeuy';
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = $uri; 
+    return $result; 
+}
 #-------------------------[Function]-------------------------#
 function sarah($keyword) {
     $uri = "https://rest.farzain.com/api/special/fansign/indo/viloid.php?apikey=ppqeuy&text=" . $keyword;
@@ -1197,7 +1205,7 @@ if($message['type']=='text') {
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => 'Hi juga ka '.$profil->displayName
+                    'text' => $profil->displayName.' Hai juga kak'
                 )
             )
         );
@@ -1572,6 +1580,21 @@ if($message['type']=='text') {
     }
 }
 #============================= FILM SC ====================#
+#-------------------------[Close]-------------------------#
+if($message['type']=='text') {
+	    if ($command == '/kbbi') {
+        $result = kbbi($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
 #-------------------------[Open]-------------------------#
 if($message['type']=='text') {
         if ($command == '/film') {
