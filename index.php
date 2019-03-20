@@ -1112,7 +1112,7 @@ if($msg_type == 'text'){
     } else {}
 } else {}
 //batasan command api//
-#=====================
+#===================== 	50000
 #============
 if($message['type']=='text') {
 	    if ($command == '/musik') {
@@ -1123,7 +1123,7 @@ if($message['type']=='text') {
                 array(
 		    'type' => 'audio',
 		    'originalContentUrl' => $result,
-		    'duration' => 500000,
+		    'duration' => 1000000000,
                 )
             )
         );
