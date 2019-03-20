@@ -1123,7 +1123,7 @@ if($message['type']=='text') {
                 array(
 		    'type' => 'audio',
 		    'originalContentUrl' => $result,
-		    'duration' => 10000,
+		    'duration' => 500000,
                 )
             )
         );
