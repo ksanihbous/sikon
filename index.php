@@ -51,6 +51,14 @@ function shalat($keyword) {
 	$result .= $json['data']['Isha'];
     return $result;
 }
+#================#
+function ss($keyword) { 
+    $uri = "http://ryns-api.herokuapp.com/screenshot?url=" . $keyword . "";  
+    $response = Unirest\Request::get("$uri");  
+    $json = json_decode($response->raw_body, true); 
+    $result .= $json['result'];
+    return $result; 
+}
 #----------------#
 function send($input, $rt){
     $send = array(
@@ -141,7 +149,7 @@ function musiknya($keyword) {
     $uri = "http://ryns-api.herokuapp.com/joox?q=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result = $json['result']['0']['url'];
+    $result .= $json['result']['0']['url'];
     return $result;
 }
 #===========================
@@ -1138,6 +1146,21 @@ if($msg_type == 'text'){
 } else {}
 //batasan command api//
 #===================== 	50000
+if($message['type']=='text') {
+	    if ($command == 'Screenshot') {
+        $result = ss($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'image',
+                    'originalContentUrl' => $result,
+                    'previewImageUrl' => $result
+                )
+            )
+        );
+    }
+}
 #============
 if($message['type']=='text') {
 	    if ($command == '/musik') {
