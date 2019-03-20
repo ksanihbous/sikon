@@ -141,7 +141,7 @@ function musiknya($keyword) {
     $uri = "http://ryns-api.herokuapp.com/joox?q=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-	$result = $json['result'][0]['url'];
+    $result = $json['result'][0]['url'];
     return $result;
 }
 #-------------------------[Function Open]-------------------------#
@@ -671,6 +671,13 @@ function lokasi($keyword) {
     return $result; 
 }
 #-------------------------[Function]-------------------------#
+function sarah($keyword) {
+    $uri = "https://rest.farzain.com/api/special/fansign/indo/viloid.php?apikey=ppqeuy&text=" . $keyword;
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = $uri; 
+    return $result; 
+}
 #-------------------------[Function]-------------------------#
 function fansign($keyword) {
     $uri = "https://rest.farzain.com/api/special/fansign/cosplay/cosplay.php?apikey=ppqeuy&text=" . $keyword;
@@ -1134,6 +1141,22 @@ if($message['type']=='text') {
 if($message['type']=='text') {
 	    if ($command == '/fansign') {
         $result = fansign($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'image',
+                    'originalContentUrl' => $result,
+                    'previewImageUrl' => $result
+                )
+            )
+        );
+    }
+}
+#=======================
+if($message['type']=='text') {
+	    if ($command == '/viloid') {
+        $result = sarah($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
