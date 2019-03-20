@@ -144,6 +144,17 @@ function musiknya($keyword) {
     $result = $json['result']['0']['url'];
     return $result;
 }
+#===========================
+function bmkg($keyword) {
+    $uri = "https://api-rtb.herokuapp.com/bmkg";
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "「Info Bmkg」";
+    $result .= "\nBmkg : ";
+    $result .= $json['info'];
+    $result .= "\n「Done~」";
+    return $result;
+}
 #-------------------------[Function Open]-------------------------#
 function tv($keyword) {
     $uri = "https://rest.farzain.com/api/acaratv.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
@@ -587,7 +598,21 @@ if($message['type']=='text') {
         );
     }
 }   
-#--------------------------- INSTAGRAM ------------------#
+#--------------------------- INFO BMKG ------------------#
+if($message['type']=='text') {
+        if ($command == '/infobmkg') {
+        $result = bmkg($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text'  => $result
+                )
+            )
+        );
+    }
+}   
 #-------------------------[Close]-------------------------#
 function instagram($keyword) {
     $uri = "https://rest.farzain.com/api/ig_profile.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
