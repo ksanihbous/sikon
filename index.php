@@ -141,7 +141,7 @@ function musiknya($keyword) {
     $uri = "http://ryns-api.herokuapp.com/joox?q=" . $keyword;
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result = $json['result'][0]['url'];
+    $result = $json['result']['0']['url'];
     return $result;
 }
 #-------------------------[Function Open]-------------------------#
